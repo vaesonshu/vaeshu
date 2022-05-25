@@ -1,11 +1,11 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header>
+      <el-header class="header">
         <Nav></Nav>
       </el-header>
-      <el-main>Main</el-main>
-      <el-footer>Footer</el-footer>
+      <el-main></el-main>
+      <el-footer></el-footer>
     </el-container>
   </div>
   <div>home</div>
@@ -13,7 +13,10 @@
 
 <script setup lang="ts">
 import Nav from "../components/nav/index.vue";
-
 </script>
 
-<style scoped></style>
+<style scoped>
+/* .header {
+  display: flex;
+} */
+</style>

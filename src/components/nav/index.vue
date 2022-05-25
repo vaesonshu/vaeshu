@@ -1,20 +1,23 @@
 <template>
-  <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-    <el-tab-pane label="User" name="first">User</el-tab-pane>
-    <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-    <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-    <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-  </el-tabs>
-  <el-switch v-model="value1" @change="toggleDark()" />
+  <div class="header">
+    <div class="container">
+      <div class="left">
+        <span>首页</span>
+        <span>首页</span>
+        <span>首页</span>
+      </div>
+      <div class="right">
+        <el-switch v-model="value1" @click="toggleDark()"></el-switch>
+      </div>
+    </div>
+    <!-- <div class="header-bottom"></div> -->
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import { useDark, useToggle } from "@vueuse/core";
 import type { TabsPaneContext } from "element-plus";
-
-const activeName = ref("first");
-
 const value1 = ref(true);
 const isDark = useDark({
   selector: "html",
@@ -27,10 +30,5 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <style lang="less" scoped>
-// .demo-tabs > .el-tabs__content {
-//   padding: 32px;
-//   color: #6b778c;
-//   font-size: 32px;
-//   font-weight: 600;
-// }
+
 </style>
