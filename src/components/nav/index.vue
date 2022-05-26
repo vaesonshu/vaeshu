@@ -29,6 +29,4 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 const toggleDark = useToggle(isDark);
 </script>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>
