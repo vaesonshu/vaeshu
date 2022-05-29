@@ -99,7 +99,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import axios from "axios";
+import { getCode } from "../api/login.js";
 onMounted(() => {
   getCaptcha();
 });
@@ -108,12 +108,9 @@ const username = ref("");
 const password = ref("");
 const code = ref("");
 const getCaptcha = () => {
-  axios.get("http://localhost:3001/getCaptcha").then((res) => {
-    if (res.status === 200) {
-      let obj = res.data;
-      if (obj.code === 200) {
-        svg.value = obj.data;
-      }
+  getCode().then((res) => {
+    if (res.code === 200) {
+      svg.value = res.data;
     }
     console.log("res", res);
   });
