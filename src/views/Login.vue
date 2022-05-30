@@ -66,7 +66,7 @@
                     <div class="layui-input-inline">
                       <span
                         style="color: #c00"
-                        @click="getCaptcha()"
+                        @click="getCaptcha"
                         v-html="svg"
                       ></span>
                     </div>
@@ -99,8 +99,20 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
 import { getCode } from "../api/login.js";
+import { v4 } from "uuid";
+const store = useStore();
 onMounted(() => {
+  let sid = "";
+  if (localStorage.getItem("sid")) {
+    sid = localStorage.getItem("sid");
+  } else {
+    sid = v4();
+    localStorage.setItem("sid", sid);
+  }
+  store.commit("setSid", sid);
+  console.log(sid);
   getCaptcha();
 });
 const svg = ref("");
@@ -108,7 +120,9 @@ const username = ref("");
 const password = ref("");
 const code = ref("");
 const getCaptcha = () => {
-  getCode().then((res) => {
+  let sid = store.state.sid;
+  console.log("从vuex中获取到的sid", sid);
+  getCode(sid).then((res) => {
     if (res.code === 200) {
       svg.value = res.data;
     }
