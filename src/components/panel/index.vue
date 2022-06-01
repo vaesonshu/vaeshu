@@ -3,13 +3,35 @@
     <div class="panel">
       <div class="layui-container">
         <ul>
-          <li class="layui-hide-xs"><a href=""></a>首页</li>
-          <li><a href=""></a>提问</li>
-          <li><a href=""></a>分享</li>
-          <li><a href=""></a>讨论</li>
-          <li><a href=""></a>建议</li>
-          <li><a href=""></a>公告</li>
-          <li><a href=""></a>动态</li>
+          <router-link to="/index" custom v-slot="{ navigate }">
+            <li
+              @click="navigate"
+              @keypress.enter="navigate"
+              role="link"
+              class="layui-this"
+            >
+              <a href="">首页</a>
+            </li>
+          </router-link>
+          <router-link
+            v-for="(item, index) in lists"
+            :key="'panel' + index"
+            :to="item.path"
+            custom
+            v-slot="{ navigate }"
+          >
+            <li
+              @click="navigate"
+              @keypress.enter="navigate"
+              role="link"
+              class="layui-hide-xs"
+            >
+              <a href="">
+                {{ item.name }}
+                <span class="layui-badge-dot" v-if="item.isNew"></span>
+              </a>
+            </li>
+          </router-link>
           <li class="layui-hide-xs"><span class="line"></span></li>
           <li class="layui-hide-xs"><a href=""></a>我发表的贴</li>
           <li class="layui-hide-xs"><a href=""></a>我收藏的贴</li>
@@ -23,7 +45,41 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+const lists = [
+  {
+    name: "提问",
+    path: "/index/ask",
+    isNew: false,
+  },
+  {
+    name: "分享",
+    path: "/index/share",
+    isNew: true,
+  },
+  {
+    name: "讨论",
+    path: "/index/discuss",
+    isNew: false,
+  },
+  {
+    name: "建议",
+    path: "/index/advise",
+    isNew: false,
+  },
+  {
+    name: "公告",
+    path: "/index/notice",
+    isNew: false,
+  },
+  {
+    name: "动态",
+    path: "/index/logs",
+    isNew: false,
+  },
+];
+</script>
 
 <style lang="less" scoped>
 @media (max-width: 768px) {
@@ -76,5 +132,8 @@ ul {
       cursor: pointer;
     }
   }
+}
+.layui-this {
+  color: #20a0ff;
 }
 </style>

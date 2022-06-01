@@ -13,4 +13,9 @@ import Main from "./components/main/index.vue";
 import Footer from "./components/footer/index.vue";
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+.right-side {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+</style>
