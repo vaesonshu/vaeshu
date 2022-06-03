@@ -27,6 +27,16 @@ const routes: RouteRecordRaw[] = [
     path: "/reg",
     name: "reg",
     component: () => import("../views/Reg.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log("from", from);
+      console.log("to", to);
+      console.log("next", next);
+      if (from.name === "login") {
+        next();
+      } else {
+        next("/login");
+      }
+    },
   },
   {
     path: "/forget",

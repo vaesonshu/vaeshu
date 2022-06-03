@@ -10,8 +10,14 @@ const getCode = (sid) => {
 
 const forget = (option) => {
   return axios.post('/forget', {
-      ...option
-    })
+    ...option
+  })
 }
 
-export { getCode, forget }
+const reg = (regInfo) => {
+  return axios.post('/login/reg', {
+    ...regInfo
+  })
+}
+
+export { getCode, forget, reg }
