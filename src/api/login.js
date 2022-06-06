@@ -1,4 +1,4 @@
-import axios from '../util/request'
+import axios from '../utils/request'
 
 const getCode = (sid) => {
   return axios.get('/getCaptcha', {

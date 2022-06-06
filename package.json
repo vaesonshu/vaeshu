@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vee-validate/i18n": "^4.5.11",
+    "@vee-validate/rules": "^4.5.11",
     "@vueuse/core": "^8.5.0",
     "axios": "^0.27.2",
     "element-plus": "^2.2.1",
