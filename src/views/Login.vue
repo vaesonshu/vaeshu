@@ -115,7 +115,7 @@
 import { Form, Field } from "vee-validate";
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
-import { getCode } from "../api/login.js";
+import { getCode, login } from "../api/login.js";
 import { v4 } from "uuid";
 const store = useStore();
 onMounted(() => {
@@ -127,13 +127,14 @@ onMounted(() => {
     localStorage.setItem("sid", sid);
   }
   store.commit("setSid", sid);
-  console.log("sid", sid);
   getCaptcha();
 });
 const svg = ref("");
 const username = ref("");
 const password = ref("");
 const code = ref("");
+const observer = ref("");
+const isShow = ref(true);
 const getCaptcha = () => {
   let sid = store.state.sid;
   console.log("从vuex中获取到的sid", sid);
@@ -144,8 +145,23 @@ const getCaptcha = () => {
     console.log("res", res);
   });
 };
-const submit = () => {
-  console.log("123123123123123123123123");
+const submit = async () => {
+  const isValid = await observer.value.validate();
+  console.log("isvalid", isValid.valid);
+  if (!isValid.valid) {
+    return;
+  }
+  console.log("isvalid", isValid);
+  login({
+    username,
+    password,
+    code,
+    sid: store.state.sid,
+  }).then((res) => {
+    if (res.code === 200) {
+      console.log("res111111", res);
+    }
+  });
 };
 </script>
 
